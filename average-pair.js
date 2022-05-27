@@ -1,37 +1,23 @@
+"use scrict";
+
 // add whatever parameters you deem necessary & write docstring
-function averagePair(word,letters) {
-  let arr1 = word.split("");
-  let arr2 = letters.split("")
-
-  let fc1 = frequencyCounter(arr1)
-  let fc2 = frequencyCounter(arr2)
-
-  for(let key in fc1){
-    if(key in fc2===false){
-      return false
-    }else{
-      if(fc1[key]!==fc2[key]){
-        return false
-      }
+function averagePair(nums, targetAvg) {
+  if (nums.length === 0) {
+    return false;
+  }
+  let start = 0;
+  let end = nums.length - 1;
+  while (start < end) {
+    let calc = (nums[start] + nums[end]) / 2;
+    if (calc > targetAvg) {
+      end -= 1;
+    }
+    else if (calc < targetAvg) {
+      start += 1;
+    }
+    else {
+      return true;
     }
   }
-  return true
-
-
-
-
-}
-
-
-
-
-
-
-function frequencyCounter(items){
-  let fc = {}
-  for(let value of items){
-    let vb = fc[value] || 0;
-    fc[value] = vb + 1
-  }
-  return fc
+  return false;
 }
